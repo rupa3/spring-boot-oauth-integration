@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>Spring Boot OAUTH Integration</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <div>
+    <h1 class="title text-center" th:text="${titlePage}"></h1>
+
+    <div sec:authorize="isAuthenticated()" class="alert alert-primary" role="alert">
+      Successfully Authenticated. Authorities are:
+      <strong th:each="authority : ${#authentication.authorities}">
+        <span
+           th:text="${authority.authority} + ' '">
+        </span>
+      </strong>
+    </div>
+
+    <div th:if="${roleType}" class="alert alert-primary" role="alert">
+      Data from Controller : <strong th:text="${roleType}"></strong>
+    </div>
+
+    <div sec:authorize="hasRole('USER')" class="alert alert-primary" role="alert">
+      This is USER Page.
+    </div>
+
+    <div sec:authorize="hasRole('ADMIN')" class="alert alert-primary" role="alert">
+      This is ADMIN Page.
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
