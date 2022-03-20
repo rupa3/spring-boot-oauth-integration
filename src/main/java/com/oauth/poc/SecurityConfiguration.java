@@ -15,7 +15,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       .authorizeRequests()
       .anyRequest().authenticated()
       .and()
-      .oauth2Login().loginPage("/oauth2/authorization/auth0");
+      .oauth2Login();
   }
 
 }
